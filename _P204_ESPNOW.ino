@@ -8,11 +8,19 @@
 /*
  * Plugin for ESPNOW support 
  * 
- * Created by FanOfHue for ESP Easy. Only tested on github nightly build dated 2049-10-27
- * Compiled on Arduino 1.8.5, using ESP8226 core 2.5.2.
+ * Created by FanOfHue for ESP Easy. Tested on ESPEasy github 20200204 release
+ * Compiled on Arduino 1.8.5, using ESP8226 core 2.6.1.
  * 
- *  espnow
+ * This is Work in Progress. ESPNOW protocol cannot be used with Wifi simultaneously
+ * So it will only work when the ESP has not started the Wifi connection yet
+ * We use a demo on event System#Wake that comes before connecting to Wifi
  * 
+ *  sample rules:
+    On system#wake do
+      ESPNowConfig 1234567890abcdef,1234567890abcdef,36:33:33:33:33:01,Sender
+      ESPNowAddPeer 1234567890abcdef,36:33:33:33:33:33,0
+      espnowSend %sysname%/ESPEasyDemo
+    endon
 */
 
 #ifdef USES_P204
